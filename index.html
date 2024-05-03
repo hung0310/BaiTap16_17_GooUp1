@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+    <script src="../path/to/flowbite/dist/datepicker.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Bai Tap 16 + 17</title>
+</head>
+<body>
+    <section class="dark:bg-gray-300">
+
+        <div class="flex flex-col items-center font-semibold text-gray-700 m-10" id="form_info">
+            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 border border-gray-500">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-center text-lg font-bold mb-10">THÔNG TIN SINH VIÊN</h1>
+                    <form class="space-y-4 md:space-y06" action="#">
+                        <div>
+                            <label for="" class="block text-gray-600 font-medium">Họ tên</label>
+                            <input type="text" id="ten" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="" class="block text-gray-600 font-medium">Giới tính</label>
+                            <div class="pl-5">
+                                <input id="rd_nam" type="radio" class="" name="gioitinh" required="">
+                                <label for="rd_nam" class="">Nam</label>
+                            </div>
+                            <div class="pl-5">
+                                <input id="rd_nu" type="radio" class="" name="gioitinh" required="">
+                                <label for="rd_nu" class="">Nữ</label>
+                            </div> 
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="" class="text-gray-600">Chuyên ngành</label>
+                            <select id="chuyennganh" class="bg-gray-50 border border-gray-300 text-gray-900text-sm rounded-lg w-full p-2">
+                                <option value="cnpm">Công nghệ phần mềm</option>
+                                <option value="attt">An toàn thông tin</option>
+                                <option value="khdl">Khoa học dữ liệu</option>
+                            </select>
+                        </div>
+
+                        <div class="">
+                            <label for="" class="text-gray-600">Ngày sinh</label>
+                            <input  required="" id="dtpk" datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-200 p-2.5 dark:placeholder-gray-400 dark:text-white " placeholder="mm/dd/yyyy">
+                        </div>                                       
+
+                        <div class="p-5">
+                            <button type="submit" onclick="ShowInfo(event)" class="border border-gray-700 rounded-lg w-full h-10 bg-emerald-300 hover:bg-emerald-500 hover:text-white">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center" id="form_search">
+            <div class="border border-gray-700 bg-gray-200 rounded-lg" style="width: 500px; height: 100px;">
+                <label for="" class="flex items-center justify-center">Tìm kiếm theo:</label>
+                <div class="flex items-center justify-center">
+                    <button onclick="Show_Search_Name_Student()" class="rounded-lg border border-gray-700 bg-cyan-300 mt-6 ml-2 hover:bg-cyan-500 hover:text-white" style="width:100px; height:30px;">Name</button>               
+                    <button onclick="Filter()" class="rounded-lg border border-gray-700 bg-cyan-300 mt-6 ml-2 hover:bg-cyan-500 hover:text-white" style="width:100px; height:30px;">Filter</button>
+                </div>
+            </div>
+        </div>  
+
+        <div class="flex items-center justify-center" id="form_search_filter" style="display: none;">
+            <div class="border border-gray-700 bg-gray-200 rounded-lg pt-5" style="width: 700px; height: 180px;">
+                <div class="flex items-center">
+                    <label for="" class="text-gray-600 ml-10">Giới tính</label>
+                    <label for="" class="text-gray-600 ml-48">Chuyên ngành</label>
+                    <label for="" class="text-gray-600 ml-32">Năm sinh</label>
+                </div>
+                <div class="flex m-2" style="gap: 40px;">
+                    <select id="select_gt" class="bg-gray-50 border border-gray-300 text-gray-900text-sm rounded-lg w-full p-2">
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    <select id="select_cn" class="bg-gray-50 border border-gray-300 text-gray-900text-sm rounded-lg w-full p-2">
+                        
+                    </select>
+                    <select id="select_ns" class="bg-gray-50 border border-gray-300 text-gray-900text-sm rounded-lg w-full p-2">
+                        
+                    </select>
+                </div>
+                <div class="flex items-center justify-center">
+                    <button onclick="Search_Filter()" class="rounded-lg border border-gray-700 bg-cyan-300 mt-6 ml-2 hover:bg-cyan-500 hover:text-white" style="width:100px; height:30px;">Tìm kiếm</button>
+                </div>
+            </div>
+        </div>  
+
+        <div class="flex items-center justify-center" id="form_search_name" style="display: none;">
+            <div class="border border-gray-700 bg-gray-200 rounded-lg" style="width: 500px; height: 80px;">
+                <div class="flex items-center">
+                    <input id="text_search" type="text" class="rounded-lg mt-6 ml-16" style="width: 250px; height: 30px;" placeholder="Tìm kiếm...">
+                    <button onclick="Search_Name_Student()" class="rounded-lg border border-gray-700 bg-cyan-300 mt-6 ml-2 hover:bg-cyan-500 hover:text-white" style="width:100px; height:30px;">Tìm kiếm</button>
+                </div>
+            </div>
+          </div>          
+
+        <div class="flex flex-col items-center font-semibold text-gray-700 m-10" id="form_update">
+            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 border border-gray-500">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-center text-lg font-bold mb-10">CẬP NHẬT THÔNG TIN SINH VIÊN</h1>
+                    <form class="space-y-4 md:space-y06" action="#">
+                        <div>
+                            <label for="" class="block text-gray-600 font-medium">Họ tên</label>
+                            <input type="text" id="ten_update" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="" class="block text-gray-600 font-medium">Giới tính</label>
+                            <div class="pl-5">
+                                <input id="rd_nam_update" type="radio" class="" name="gioitinh" required="">
+                                <label for="rd_nam" class="">Nam</label>
+                            </div>
+                            <div class="pl-5">
+                                <input id="rd_nu_update" type="radio" class="" name="gioitinh" required="">
+                                <label for="rd_nu" class="">Nữ</label>
+                            </div> 
+                        </div>
+
+                        <div class="mt-3">
+                            <label for="" class="text-gray-600">Chuyên ngành</label>
+                            <select id="chuyennganh_update" class="bg-gray-50 border border-gray-300 text-gray-900text-sm rounded-lg w-full p-2">
+                                <option value="cnpm">Công nghệ phần mềm</option>
+                                <option value="attt">An toàn thông tin</option>
+                                <option value="khdl">Khoa học dữ liệu</option>
+                            </select>
+                        </div>
+
+                        <div class="">
+                            <label for="" class="text-gray-600">Ngày sinh</label>
+                            <input  required="" id="dtpk_update" datepicker type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-200 p-2.5 dark:placeholder-gray-400 dark:text-white " placeholder="mm/dd/yyyy">
+                        </div>                                       
+
+                        <div class="p-5">
+                            <button type="submit" onclick="UpdateInFo(event)" class="border border-gray-700 rounded-lg w-full h-10 bg-emerald-300 hover:bg-emerald-500 hover:text-white">Cập nhật</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="center custom_container p-10 flex justify-center items-center h-screen w-auto bg-gray-300">
+            <div class="bg-white rounded-lg p-6 center" style="width: 1600px; height: auto;">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" id="table_list_student">
+                    <caption class="text-left text-lg font-bold text-gray-700 pb-5">DANH SÁCH SINH VIÊN</caption>
+                    <thead class="text-xs text-gray-400 uppercase dark:text-gray-400">
+                        <tr>
+                            <th scope="col" style="width: 5%;">ID</th>
+                            <th scope="col" style="width: 25%;">Tên sinh viên</th>
+                            <th scope="col" style="width: 15%;">Ngày sinh</th>
+                            <th scope="col" style="width: 15%;">Giới tính</th>
+                            <th scope="col" style="width: 20%;">Chuyên ngành</th>
+                            <th scope="col" style="width: 10%;">Cập nhật</th>
+                            <th scope="col" style="width: 10%;">Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>  
+        </div> 
+        
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>
