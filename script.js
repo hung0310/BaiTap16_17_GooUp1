@@ -173,26 +173,20 @@ function Show_Search_Name_Student() {
     var form_search_name = document.getElementById('form_search_name');
     form_search_name.style.display = 'flex';
 
-    var tablebody = tableList.querySelector('tbody');
-    tablebody.innerHTML = '';
-
     var form_search = document.getElementById('form_search');
     form_search.style.display = 'none';
 }
 
 function Search_Name_Student() {
     var ten = document.getElementById('text_search').value;
-    if(ten === 'all') {
+    if (ten === 'all') {
         RenderList();
-        var form_search = document.getElementById('form_search');
-        form_search.style.display = 'flex';
-        var form_search_name = document.getElementById('form_search_name');
-        form_search_name.style.display = 'none';
         document.getElementById('text_search').value = '';
-    }
-    else if(ten) {
-        var SV = studentList.filter(student => student.ten === ten);
-        if(SV.length > 0) {
+    } else if (ten) {
+        var SV = studentList.filter(student => {
+            return student.ten.toLowerCase().includes(' ' + ten.toLowerCase()) || student.ten.toLowerCase().startsWith(ten.toLowerCase());
+        });
+        if (SV.length > 0) {
             var tablebody = tableList.querySelector('tbody');
             tablebody.innerHTML = '';
         
@@ -239,20 +233,10 @@ function Search_Name_Student() {
         
                 tablebody.appendChild(row);
             });
-            var form_search = document.getElementById('form_search');
-            form_search.style.display = 'flex';
-            var form_search_name = document.getElementById('form_search_name');
-            form_search_name.style.display = 'none';
             document.getElementById('text_search').value = '';
         } else {
-            var tablebody = tableList.querySelector('tbody');
-            tablebody.innerHTML = '';
             alert("Không có sinh viên nào được tìm thấy");
-
-            var form_search = document.getElementById('form_search');
-            form_search.style.display = 'flex';
-            var form_search_name = document.getElementById('form_search_name');
-            form_search_name.style.display = 'none';
+            RenderList();
             document.getElementById('text_search').value = '';
         }
     } else {
@@ -285,9 +269,6 @@ function GetNS() {
 function Filter() {
     var form_search_filter = document.getElementById('form_search_filter');
     form_search_filter.style.display = 'flex';
-
-    var tablebody = tableList.querySelector('tbody');
-    tablebody.innerHTML = '';
 
     var CN = GetCN();
     var select_cn = document.getElementById('select_cn');
@@ -374,19 +355,25 @@ function Search_Filter() {
     
             tablebody.appendChild(row);
         });
-        var form_search = document.getElementById('form_search');
-        form_search.style.display = 'flex';
-        var form_search_filter = document.getElementById('form_search_filter');
-        form_search_filter.style.display = 'none';
-        document.getElementById('text_search').value = '';
     } else {
+        alert("Không có sinh viên nào được tìm thấy");
         var tablebody = tableList.querySelector('tbody');
         tablebody.innerHTML = '';
-        alert("Không có sinh viên nào được tìm thấy");
+        RenderList();
+    }
+}
+
+function Back() {
         var form_search = document.getElementById('form_search');
         form_search.style.display = 'flex';
         var form_search_filter = document.getElementById('form_search_filter');
         form_search_filter.style.display = 'none';
+        document.getElementById('text_search').value = '';   
+        var form_search_name = document.getElementById('form_search_name');
+        form_search_name.style.display = 'none';
         document.getElementById('text_search').value = '';
-    }
+
+        var tablebody = tableList.querySelector('tbody');
+        tablebody.innerHTML = '';
+        RenderList();
 }
