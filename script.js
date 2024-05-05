@@ -170,6 +170,9 @@ function DeleteInfo(id, event) {
 }
 
 function Show_Search_Name_Student() {
+    var form_info = document.getElementById('form_info');
+    form_info.style.display = 'none';
+    
     var form_search_name = document.getElementById('form_search_name');
     form_search_name.style.display = 'flex';
 
@@ -270,6 +273,9 @@ function Filter() {
     var form_search_filter = document.getElementById('form_search_filter');
     form_search_filter.style.display = 'flex';
 
+    var form_info = document.getElementById('form_info');
+    form_info.style.display = 'none';
+
     var CN = GetCN();
     var select_cn = document.getElementById('select_cn');
     while (select_cn.options.length > 0) {
@@ -364,16 +370,18 @@ function Search_Filter() {
 }
 
 function Back() {
-        var form_search = document.getElementById('form_search');
-        form_search.style.display = 'flex';
-        var form_search_filter = document.getElementById('form_search_filter');
-        form_search_filter.style.display = 'none';
-        document.getElementById('text_search').value = '';   
-        var form_search_name = document.getElementById('form_search_name');
-        form_search_name.style.display = 'none';
-        document.getElementById('text_search').value = '';
+    var form_info = document.getElementById('form_info');
+    form_info.style.display = 'flex';
+    var form_search = document.getElementById('form_search');
+    form_search.style.display = 'flex';
+    var form_search_filter = document.getElementById('form_search_filter');
+    form_search_filter.style.display = 'none';
+    document.getElementById('text_search').value = '';   
+    var form_search_name = document.getElementById('form_search_name');
+    form_search_name.style.display = 'none';
+    document.getElementById('text_search').value = '';
 
-        var tablebody = tableList.querySelector('tbody');
-        tablebody.innerHTML = '';
-        RenderList();
+    var tablebody = tableList.querySelector('tbody');
+    tablebody.innerHTML = '';
+    RenderList();
 }
